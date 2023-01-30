@@ -10,7 +10,7 @@ metadata:
 data:
   quarkus.hibernate-orm.database.generation: validate
   quarkus.hibernate-orm.sql-load-script: no-file
-  quarkus.datasource.jdbc.url: jdbc:otel:postgresql://villains-db:5432/villains_database
+  quarkus.datasource.jdbc.url: jdbc:otel:postgresql://labors-db:5432/villains_database
   quarkus.opentelemetry.tracer.exporter.otlp.endpoint: http://otel-collector:4317
 ---
 apiVersion: v1
@@ -30,10 +30,10 @@ apiVersion: v1
 kind: Secret
 metadata:
   labels:
-    app: villains-db
+    app: labors-db
     application: villains-service
     system: quarkus-super-heroes
-  name: villains-db-config
+  name: labors-db-config
 data:
   POSTGRESQL_DATABASE: dmlsbGFpbnNfZGF0YWJhc2U=
   POSTGRESQL_USERNAME: c3VwZXJiYWQ=
@@ -44,10 +44,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: villains-db
+    app: labors-db
     application: villains-service
     system: quarkus-super-heroes
-  name: villains-db-init
+  name: labors-db-init
 data:
   get-data.sh: |-
     #!/bin/bash
@@ -58,29 +58,29 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: villains-db
+    app: labors-db
     application: villains-service
     system: quarkus-super-heroes
     app.kubernetes.io/part-of: labors-service
     app.openshift.io/runtime: postgresql
-  name: villains-db
+  name: labors-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: villains-db
+      name: labors-db
   template:
     metadata:
       labels:
         application: villains-service
-        name: villains-db
+        name: labors-db
     spec:
       containers:
         - envFrom:
             - secretRef:
-                name: villains-db-config
+                name: labors-db-config
           image: bitnami/postgresql:14
-          name: villains-db
+          name: labors-db
           ports:
             - containerPort: 5432
           resources:
@@ -90,9 +90,9 @@ spec:
               memory: 32Mi
           volumeMounts:
             - mountPath: /bitnami/postgresql
-              name: villains-db-data
+              name: labors-db-data
             - mountPath: /docker-entrypoint-initdb.d
-              name: villains-db-init-data
+              name: labors-db-init-data
       initContainers:
         - command:
             - sh
@@ -101,34 +101,34 @@ spec:
           name: get-data
           volumeMounts:
             - mountPath: /docker-entrypoint-preinitdb.d
-              name: villains-db-init
+              name: labors-db-init
             - mountPath: /docker-entrypoint-initdb.d
-              name: villains-db-init-data
+              name: labors-db-init-data
           workingDir: /docker-entrypoint-preinitdb.d
       volumes:
         - emptyDir: {}
-          name: villains-db-data
+          name: labors-db-data
         - emptyDir: {}
-          name: villains-db-init-data
+          name: labors-db-init-data
         - configMap:
-            name: villains-db-init
-          name: villains-db-init
+            name: labors-db-init
+          name: labors-db-init
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: villains-db
+    name: labors-db
     application: villains-service
     system: quarkus-super-heroes
-  name: villains-db
+  name: labors-db
 spec:
   ports:
     - port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
-    name: villains-db
+    name: labors-db
   type: ClusterIP
 ---
 apiVersion: image.openshift.io/v1
@@ -136,7 +136,7 @@ kind: ImageStream
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "villains-db,otel-collector"
+    app.openshift.io/connects-to: "labors-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
   labels:
@@ -180,7 +180,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "villains-db,otel-collector"
+    app.openshift.io/connects-to: "labors-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
     prometheus.io/scrape: "true"
@@ -206,7 +206,7 @@ spec:
       annotations:
         prometheus.io/scheme: http
         app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-        app.openshift.io/connects-to: "villains-db,otel-collector"
+        app.openshift.io/connects-to: "labors-db,otel-collector"
         app.openshift.io/vcs-ref: main
         app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
         prometheus.io/scrape: "true"
@@ -280,7 +280,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "villains-db,otel-collector"
+    app.openshift.io/connects-to: "labors-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
     prometheus.io/scrape: "true"
@@ -312,7 +312,7 @@ kind: Route
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "villains-db,otel-collector"
+    app.openshift.io/connects-to: "labors-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
   labels:
@@ -342,7 +342,7 @@ metadata:
 data:
   quarkus.hibernate-orm.database.generation: validate
   quarkus.hibernate-orm.sql-load-script: no-file
-  quarkus.datasource.reactive.url: postgresql://heroes-db:5432/heroes_database
+  quarkus.datasource.reactive.url: postgresql://liberals-db:5432/heroes_database
   quarkus.opentelemetry.tracer.exporter.otlp.endpoint: http://otel-collector:4317
 ---
 apiVersion: v1
@@ -362,10 +362,10 @@ apiVersion: v1
 kind: Secret
 metadata:
   labels:
-    app: heroes-db
+    app: liberals-db
     application: heroes-service
     system: quarkus-super-heroes
-  name: heroes-db-config
+  name: liberals-db-config
 data:
   POSTGRESQL_DATABASE: aGVyb2VzX2RhdGFiYXNl
   POSTGRESQL_USERNAME: c3VwZXJtYW4=
@@ -376,10 +376,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: heroes-db
+    app: liberals-db
     application: heroes-service
     system: quarkus-super-heroes
-  name: heroes-db-init
+  name: liberals-db-init
 data:
   get-data.sh: |-
     #!/bin/bash
@@ -390,30 +390,30 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: heroes-db
+    app: liberals-db
     application: heroes-service
     system: quarkus-super-heroes
     app.kubernetes.io/part-of: liberals-service
     app.openshift.io/runtime: postgresql
-  name: heroes-db
+  name: liberals-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: heroes-db
+      name: liberals-db
   template:
     metadata:
       labels:
-        name: heroes-db
+        name: liberals-db
         application: heroes-service
         system: quarkus-super-heroes
     spec:
       containers:
         - envFrom:
             - secretRef:
-                name: heroes-db-config
+                name: liberals-db-config
           image: bitnami/postgresql:14
-          name: heroes-db
+          name: liberals-db
           ports:
             - containerPort: 5432
           resources:
@@ -423,9 +423,9 @@ spec:
               memory: 32Mi
           volumeMounts:
             - mountPath: /bitnami/postgresql
-              name: heroes-db-data
+              name: liberals-db-data
             - mountPath: /docker-entrypoint-initdb.d
-              name: heroes-db-init-data
+              name: liberals-db-init-data
       initContainers:
         - command:
             - sh
@@ -434,34 +434,34 @@ spec:
           name: get-data
           volumeMounts:
             - mountPath: /docker-entrypoint-preinitdb.d
-              name: heroes-db-init
+              name: liberals-db-init
             - mountPath: /docker-entrypoint-initdb.d
-              name: heroes-db-init-data
+              name: liberals-db-init-data
           workingDir: /docker-entrypoint-preinitdb.d
       volumes:
         - emptyDir: {}
-          name: heroes-db-data
+          name: liberals-db-data
         - emptyDir: {}
-          name: heroes-db-init-data
+          name: liberals-db-init-data
         - configMap:
-            name: heroes-db-init
-          name: heroes-db-init
+            name: liberals-db-init
+          name: liberals-db-init
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: heroes-db
+    name: liberals-db
     application: heroes-service
     system: quarkus-super-heroes
-  name: heroes-db
+  name: liberals-db
 spec:
   ports:
     - port: 5432
       protocol: TCP
       targetPort: 5432
   selector:
-    name: heroes-db
+    name: liberals-db
   type: ClusterIP
 ---
 apiVersion: image.openshift.io/v1
@@ -469,7 +469,7 @@ kind: ImageStream
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "heroes-db,otel-collector"
+    app.openshift.io/connects-to: "liberals-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
   labels:
@@ -513,7 +513,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "heroes-db,otel-collector"
+    app.openshift.io/connects-to: "liberals-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
     prometheus.io/scrape: "true"
@@ -539,7 +539,7 @@ spec:
       annotations:
         prometheus.io/scheme: http
         app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-        app.openshift.io/connects-to: "heroes-db,otel-collector"
+        app.openshift.io/connects-to: "liberals-db,otel-collector"
         app.openshift.io/vcs-ref: main
         app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
         prometheus.io/scrape: "true"
@@ -613,7 +613,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "heroes-db,otel-collector"
+    app.openshift.io/connects-to: "liberals-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
     prometheus.io/scrape: "true"
@@ -645,7 +645,7 @@ kind: Route
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "heroes-db,otel-collector"
+    app.openshift.io/connects-to: "liberals-db,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
   labels:
