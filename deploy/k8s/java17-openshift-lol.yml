@@ -3,10 +3,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
-  name: rest-villains-config
+  name: rest-labors-config
 data:
   quarkus.hibernate-orm.database.generation: validate
   quarkus.hibernate-orm.sql-load-script: no-file
@@ -17,10 +17,10 @@ apiVersion: v1
 kind: Secret
 metadata:
   labels:
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
-  name: rest-villains-config-creds
+  name: rest-labors-config-creds
 data:
   quarkus.datasource.username: c3VwZXJiYWQ=
   quarkus.datasource.password: c3VwZXJiYWQ=
@@ -140,14 +140,14 @@ metadata:
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
   labels:
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
-    app.kubernetes.io/name: rest-villains
-  name: rest-villains
+    app.kubernetes.io/name: rest-labors
+  name: rest-labors
 spec:
   lookupPolicy:
     local: false
@@ -187,20 +187,20 @@ metadata:
     prometheus.io/path: /q/metrics
     prometheus.io/port: "8084"
   labels:
-    app.kubernetes.io/name: rest-villains
+    app.kubernetes.io/name: rest-labors
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: rest-villains
+  name: rest-labors
 spec:
   replicas: 1
   selector:
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
-    app.kubernetes.io/name: rest-villains
+    app.kubernetes.io/name: rest-labors
   template:
     metadata:
       annotations:
@@ -213,13 +213,13 @@ spec:
         prometheus.io/path: /q/metrics
         prometheus.io/port: "8084"
       labels:
-        app: rest-villains
+        app: rest-labors
         application: villains-service
         system: quarkus-super-heroes
         app.openshift.io/runtime: quarkus
         app.kubernetes.io/part-of: labors-service
         app.kubernetes.io/version: java17-latest
-        app.kubernetes.io/name: rest-villains
+        app.kubernetes.io/name: rest-labors
     spec:
       containers:
         - env:
@@ -229,10 +229,10 @@ spec:
                   fieldPath: metadata.namespace
           envFrom:
             - secretRef:
-                name: rest-villains-config-creds
+                name: rest-labors-config-creds
             - configMapRef:
-                name: rest-villains-config
-          image: rest-villains:java17-latest
+                name: rest-labors-config
+          image: rest-labors:java17-latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -244,7 +244,7 @@ spec:
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
-          name: rest-villains
+          name: rest-labors
           ports:
             - containerPort: 8084
               name: http
@@ -268,10 +268,10 @@ spec:
     - imageChangeParams:
         automatic: true
         containerNames:
-          - rest-villains
+          - rest-labors
         from:
           kind: ImageStreamTag
-          name: rest-villains:java17-latest
+          name: rest-labors:java17-latest
       type: ImageChange
 ---
 apiVersion: v1
@@ -287,14 +287,14 @@ metadata:
     prometheus.io/path: /q/metrics
     prometheus.io/port: "8084"
   labels:
-    app.kubernetes.io/name: rest-villains
+    app.kubernetes.io/name: rest-labors
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: rest-villains
+  name: rest-labors
 spec:
   ports:
     - name: http
@@ -302,7 +302,7 @@ spec:
       protocol: TCP
       targetPort: 8084
   selector:
-    app.kubernetes.io/name: rest-villains
+    app.kubernetes.io/name: rest-labors
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
   type: ClusterIP
@@ -316,20 +316,20 @@ metadata:
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
   labels:
-    app.kubernetes.io/name: rest-villains
+    app.kubernetes.io/name: rest-labors
     app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
-    app: rest-villains
+    app: rest-labors
     application: villains-service
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: rest-villains
+  name: rest-labors
 spec:
   port:
     targetPort: http
   to:
     kind: Service
-    name: rest-villains
+    name: rest-labors
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -691,7 +691,7 @@ data:
   quarkus.stork.hero-service.service-discovery.application: rest-heroes
   quarkus.stork.hero-service.service-discovery.refresh-period: 1M
   quarkus.stork.villain-service.service-discovery.type: kubernetes
-  quarkus.stork.villain-service.service-discovery.application: rest-villains
+  quarkus.stork.villain-service.service-discovery.application: rest-labors
   quarkus.stork.villain-service.service-discovery.refresh-period: 1M
   quarkus.opentelemetry.tracer.exporter.otlp.endpoint: http://otel-collector:4317
   kafka.bootstrap.servers: PLAINTEXT://fights-kafka:9092
@@ -958,7 +958,7 @@ kind: ImageStream
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-villains,rest-heroes,otel-collector"
+    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-labors,rest-heroes,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:35 +0000
   labels:
@@ -1002,7 +1002,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-villains,rest-heroes,otel-collector"
+    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-labors,rest-heroes,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:35 +0000
     prometheus.io/scrape: "true"
@@ -1028,7 +1028,7 @@ spec:
       annotations:
         prometheus.io/scheme: http
         app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-        app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-villains,rest-heroes,otel-collector"
+        app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-labors,rest-heroes,otel-collector"
         app.openshift.io/vcs-ref: main
         app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:35 +0000
         prometheus.io/scrape: "true"
@@ -1102,7 +1102,7 @@ metadata:
   annotations:
     prometheus.io/scheme: http
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-villains,rest-heroes,otel-collector"
+    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-labors,rest-heroes,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:35 +0000
     prometheus.io/scrape: "true"
@@ -1134,7 +1134,7 @@ kind: Route
 metadata:
   annotations:
     app.openshift.io/vcs-url: https://github.com/quarkusio/quarkus-super-heroes
-    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-villains,rest-heroes,otel-collector"
+    app.openshift.io/connects-to: "fights-db,fights-kafka,apicurio,rest-labors,rest-heroes,otel-collector"
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:35 +0000
   labels:
