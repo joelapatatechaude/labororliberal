@@ -46,7 +46,7 @@ export class FightService {
 
     if (this.calculateApiBaseUrl) {
       // If calculateApiBaseUrl then just replace "ui-super-heroes" with "rest-fights" in the current URL
-      this.basePath = window.location.protocol + "//" + window.location.host.replace('ui-elections', 'rest-fights');
+      this.basePath = window.location.protocol + "//" + window.location.host.replace('ui-elections', 'rest-elections');
     }
 
     // Fallback to whatever is in the browser if basePath isn't set

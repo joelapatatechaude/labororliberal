@@ -154,21 +154,21 @@ spec:
   tags:
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-villains:java11-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-labors:java11-latest
       importPolicy: {}
       name: java11-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-villains:java17-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-labors:java17-latest
       importPolicy: {}
       name: java17-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-villains:native-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-labors:native-latest
       importPolicy: {}
       name: native-latest
       referencePolicy:
@@ -487,21 +487,21 @@ spec:
   tags:
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-heroes:java11-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-liberals:java11-latest
       importPolicy: {}
       name: java11-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-heroes:java17-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-liberals:java17-latest
       importPolicy: {}
       name: java17-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-heroes:native-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-liberals:native-latest
       importPolicy: {}
       name: native-latest
       referencePolicy:
@@ -1157,10 +1157,10 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   labels:
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
-  name: event-statistics-config
+  name: election-statistics-config
 data:
   kafka.bootstrap.servers: PLAINTEXT://fights-kafka:9092
   mp.messaging.connector.smallrye-kafka.apicurio.registry.url: http://apicurio:8080/apis/registry/v2
@@ -1170,10 +1170,10 @@ apiVersion: v1
 kind: Secret
 metadata:
   labels:
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
-  name: event-statistics-config-creds
+  name: election-statistics-config-creds
 type: Opaque
 ---
 apiVersion: apps/v1
@@ -1359,35 +1359,35 @@ metadata:
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:51 +0000
   labels:
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
-  name: event-statistics
+  name: election-statistics
 spec:
   lookupPolicy:
     local: false
   tags:
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-event-statistics:java11-latest
+        name: quay.io/rh_ee_cschmitz/lol-election-statistics:java11-latest
       importPolicy: {}
       name: java11-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-event-statistics:java17-latest
+        name: quay.io/rh_ee_cschmitz/lol-election-statistics:java17-latest
       importPolicy: {}
       name: java17-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-event-statistics:native-latest
+        name: quay.io/rh_ee_cschmitz/lol-election-statistics:native-latest
       importPolicy: {}
       name: native-latest
       referencePolicy:
@@ -1406,19 +1406,19 @@ metadata:
     prometheus.io/path: /q/metrics
     prometheus.io/port: "8085"
   labels:
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: event-statistics
+  name: election-statistics
 spec:
   replicas: 1
   selector:
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
   template:
     metadata:
@@ -1432,12 +1432,12 @@ spec:
         prometheus.io/path: /q/metrics
         prometheus.io/port: "8085"
       labels:
-        app: event-statistics
-        application: event-stats
+        app: election-statistics
+        application: election-stats
         system: quarkus-super-heroes
         app.openshift.io/runtime: quarkus
-        app.kubernetes.io/name: event-statistics
-        app.kubernetes.io/part-of: event-stats
+        app.kubernetes.io/name: election-statistics
+        app.kubernetes.io/part-of: election-stats
         app.kubernetes.io/version: java17-latest
     spec:
       containers:
@@ -1448,10 +1448,10 @@ spec:
                   fieldPath: metadata.namespace
           envFrom:
             - secretRef:
-                name: event-statistics-config-creds
+                name: election-statistics-config-creds
             - configMapRef:
-                name: event-statistics-config
-          image: event-statistics:java17-latest
+                name: election-statistics-config
+          image: election-statistics:java17-latest
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -1463,7 +1463,7 @@ spec:
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
-          name: event-statistics
+          name: election-statistics
           ports:
             - containerPort: 8085
               name: http
@@ -1487,10 +1487,10 @@ spec:
     - imageChangeParams:
         automatic: true
         containerNames:
-          - event-statistics
+          - election-statistics
         from:
           kind: ImageStreamTag
-          name: event-statistics:java17-latest
+          name: election-statistics:java17-latest
       type: ImageChange
 ---
 apiVersion: v1
@@ -1506,14 +1506,14 @@ metadata:
     prometheus.io/path: /q/metrics
     prometheus.io/port: "8085"
   labels:
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: event-statistics
+  name: election-statistics
 spec:
   ports:
     - name: http
@@ -1521,8 +1521,8 @@ spec:
       protocol: TCP
       targetPort: 8085
   selector:
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
   type: ClusterIP
 ---
@@ -1535,20 +1535,20 @@ metadata:
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:51 +0000
   labels:
-    app.kubernetes.io/name: event-statistics
-    app.kubernetes.io/part-of: event-stats
+    app.kubernetes.io/name: election-statistics
+    app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
-    app: event-statistics
-    application: event-stats
+    app: election-statistics
+    application: election-stats
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-  name: event-statistics
+  name: election-statistics
 spec:
   port:
     targetPort: http
   to:
     kind: Service
-    name: event-statistics
+    name: election-statistics
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1585,7 +1585,7 @@ spec:
         prometheus.io/scheme: http
     spec:
       containers:
-        - image: quay.io/rh_ee_cschmitz/lol-ui-super-heroes:latest
+        - image: quay.io/rh_ee_cschmitz/lol-ui-elections:latest
           name: ui-elections
           imagePullPolicy: Always
           env:

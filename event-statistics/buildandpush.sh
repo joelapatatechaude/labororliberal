@@ -8,7 +8,7 @@
        -Dquarkus.container-image.push=true \
        -Dquarkus.container-image.registry=quay.io \
        -Dquarkus.container-image.group=rh_ee_cschmitz \
-       -Dquarkus.container-image.name=lol-event-statistics \
+       -Dquarkus.container-image.name=lol-election-statistics \
        -Dquarkus.container-image.tag=java17-latest
 
 
