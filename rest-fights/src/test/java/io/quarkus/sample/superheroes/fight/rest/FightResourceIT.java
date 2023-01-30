@@ -80,7 +80,7 @@ public class FightResourceIT {
   private static final String HERO_API_BASE_URI = "/api/heroes";
 	private static final String HERO_API_URI = HERO_API_BASE_URI + "/random";
   private static final String HERO_API_HELLO_URI = HERO_API_BASE_URI + "/hello";
-	private static final String HEROES_TEAM_NAME = "heroes";
+	private static final String HEROES_TEAM_NAME = "liberals";
 	private static final String DEFAULT_HERO_NAME = "Super Baguette";
 	private static final String DEFAULT_HERO_PICTURE = "super_baguette.png";
 	private static final String DEFAULT_HERO_POWERS = "eats baguette really quickly";
@@ -96,7 +96,7 @@ public class FightResourceIT {
   private static final String VILLAIN_API_BASE_URI = "/api/villains";
 	private static final String VILLAIN_API_URI = VILLAIN_API_BASE_URI + "/random";
   private static final String VILLAIN_API_HELLO_URI = VILLAIN_API_BASE_URI + "/hello";
-	private static final String VILLAINS_TEAM_NAME = "villains";
+	private static final String VILLAINS_TEAM_NAME = "labors";
 	private static final String DEFAULT_VILLAIN_NAME = "Super Chocolatine";
 	private static final String DEFAULT_VILLAIN_PICTURE = "super_chocolatine.png";
 	private static final String DEFAULT_VILLAIN_POWERS = "does not eat pain au chocolat";
