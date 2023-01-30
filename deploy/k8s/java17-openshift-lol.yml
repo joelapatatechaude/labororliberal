@@ -976,21 +976,21 @@ spec:
   tags:
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-fights:java11-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-elections:java11-latest
       importPolicy: {}
       name: java11-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-fights:java17-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-elections:java17-latest
       importPolicy: {}
       name: java17-latest
       referencePolicy:
         type: Source
     - from:
         kind: DockerImage
-        name: quay.io/rh_ee_cschmitz/lol-rest-fights:native-latest
+        name: quay.io/rh_ee_cschmitz/lol-rest-elections:native-latest
       importPolicy: {}
       name: native-latest
       referencePolicy:

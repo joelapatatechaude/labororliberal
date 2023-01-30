@@ -9,7 +9,7 @@
        -Dquarkus.container-image.registry=quay.io \
        -Dquarkus.container-image.group=rh_ee_cschmitz \
        -Dquarkus.container-image.name=lol-rest-villains \
-       -Dquarkus.container-image.tag=latest
+       -Dquarkus.container-image.tag=java17-latest
 
 
 #       -Dquarkus.profile=openshift-17 \
