@@ -1554,8 +1554,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ui-super-heroes
-    application: super-heroes
+    app: ui-elections
+    application: elections
     system: quarkus-super-heroes
     app.openshift.io/runtime: nodejs
     app.kubernetes.io/part-of: super-heroes
@@ -1565,18 +1565,18 @@ metadata:
     prometheus.io/path: /metrics
     prometheus.io/port: "8080"
     prometheus.io/scheme: http
-  name: ui-super-heroes
+  name: ui-elections
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ui-super-heroes
-      application: super-heroes
+      app: ui-elections
+      application: elections
   template:
     metadata:
       labels:
-        app: ui-super-heroes
-        application: super-heroes
+        app: ui-elections
+        application: elections
         system: quarkus-super-heroes
       annotations:
         prometheus.io/scrape: "true"
@@ -1586,7 +1586,7 @@ spec:
     spec:
       containers:
         - image: quay.io/rh_ee_cschmitz/lol-ui-super-heroes:latest
-          name: ui-super-heroes
+          name: ui-elections
           imagePullPolicy: Always
           env:
             - name: CALCULATE_API_BASE_URL
@@ -1625,10 +1625,10 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    name: ui-super-heroes
-    application: super-heroes
+    name: ui-elections
+    application: elections
     system: quarkus-super-heroes
-  name: ui-super-heroes
+  name: ui-elections
 spec:
   ports:
     - port: 80
@@ -1636,21 +1636,21 @@ spec:
       targetPort: 8080
       name: http
   selector:
-    app: ui-super-heroes
-    application: super-heroes
+    app: ui-elections
+    application: elections
   type: ClusterIP
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: ui-super-heroes
+  name: ui-elections
   labels:
-    app: ui-super-heroes
-    application: super-heroes
+    app: ui-elections
+    application: elections
     system: quarkus-super-heroes
 spec:
   to:
     kind: Service
-    name: ui-super-heroes
+    name: ui-elections
   port:
     targetPort: 8080
