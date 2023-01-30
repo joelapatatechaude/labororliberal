@@ -200,15 +200,17 @@ public class FightService {
 		// Amazingly fancy logic to determine the winner...
 		return Uni.createFrom().item(() -> {
 				Fight fight;
-
-				if (shouldHeroWin(fighters)) {
+				
+				fight = heroWonFight(fighters);
+				if (fighters.getHero().getLevel() == fighters.getVillain().getLevel()){
+					fight = getRandomWinner(fighters);
+				}
+				else
+				if (fighters.getHero().getLevel() > fighters.getVillain().getLevel()) {
 					fight = heroWonFight(fighters);
 				}
-				else if (shouldVillainWin(fighters)) {
-					fight = villainWonFight(fighters);
-				}
 				else {
-					fight = getRandomWinner(fighters);
+					fight = villainWonFight(fighters);
 				}
 
 				fight.fightDate = Instant.now();
