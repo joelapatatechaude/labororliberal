@@ -61,7 +61,7 @@ metadata:
     app: villains-db
     application: villains-service
     system: quarkus-super-heroes
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.openshift.io/runtime: postgresql
   name: villains-db
 spec:
@@ -144,7 +144,7 @@ metadata:
     application: villains-service
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
     app.kubernetes.io/name: rest-villains
   name: rest-villains
@@ -188,7 +188,7 @@ metadata:
     prometheus.io/port: "8084"
   labels:
     app.kubernetes.io/name: rest-villains
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
     app: rest-villains
     application: villains-service
@@ -198,7 +198,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
     app.kubernetes.io/name: rest-villains
   template:
@@ -217,7 +217,7 @@ spec:
         application: villains-service
         system: quarkus-super-heroes
         app.openshift.io/runtime: quarkus
-        app.kubernetes.io/part-of: villains-service
+        app.kubernetes.io/part-of: labors-service
         app.kubernetes.io/version: java17-latest
         app.kubernetes.io/name: rest-villains
     spec:
@@ -288,7 +288,7 @@ metadata:
     prometheus.io/port: "8084"
   labels:
     app.kubernetes.io/name: rest-villains
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
     app: rest-villains
     application: villains-service
@@ -303,7 +303,7 @@ spec:
       targetPort: 8084
   selector:
     app.kubernetes.io/name: rest-villains
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
   type: ClusterIP
 ---
@@ -317,7 +317,7 @@ metadata:
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:19:56 +0000
   labels:
     app.kubernetes.io/name: rest-villains
-    app.kubernetes.io/part-of: villains-service
+    app.kubernetes.io/part-of: labors-service
     app.kubernetes.io/version: java17-latest
     app: rest-villains
     application: villains-service
@@ -393,7 +393,7 @@ metadata:
     app: heroes-db
     application: heroes-service
     system: quarkus-super-heroes
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.openshift.io/runtime: postgresql
   name: heroes-db
 spec:
@@ -478,7 +478,7 @@ metadata:
     system: quarkus-super-heroes
     app.openshift.io/runtime: quarkus
     app.kubernetes.io/version: java17-latest
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/name: rest-heroes
   name: rest-heroes
 spec:
@@ -521,7 +521,7 @@ metadata:
     prometheus.io/port: "8083"
   labels:
     app.kubernetes.io/name: rest-heroes
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/version: java17-latest
     app: rest-heroes
     application: heroes-service
@@ -532,7 +532,7 @@ spec:
   replicas: 1
   selector:
     app.kubernetes.io/version: java17-latest
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/name: rest-heroes
   template:
     metadata:
@@ -551,7 +551,7 @@ spec:
         system: quarkus-super-heroes
         app.openshift.io/runtime: quarkus
         app.kubernetes.io/version: java17-latest
-        app.kubernetes.io/part-of: heroes-service
+        app.kubernetes.io/part-of: liberals-service
         app.kubernetes.io/name: rest-heroes
     spec:
       containers:
@@ -621,7 +621,7 @@ metadata:
     prometheus.io/port: "8083"
   labels:
     app.kubernetes.io/name: rest-heroes
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/version: java17-latest
     app: rest-heroes
     application: heroes-service
@@ -636,7 +636,7 @@ spec:
       targetPort: 8083
   selector:
     app.kubernetes.io/name: rest-heroes
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/version: java17-latest
   type: ClusterIP
 ---
@@ -650,7 +650,7 @@ metadata:
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:14 +0000
   labels:
     app.kubernetes.io/name: rest-heroes
-    app.kubernetes.io/part-of: heroes-service
+    app.kubernetes.io/part-of: liberals-service
     app.kubernetes.io/version: java17-latest
     app: rest-heroes
     application: heroes-service

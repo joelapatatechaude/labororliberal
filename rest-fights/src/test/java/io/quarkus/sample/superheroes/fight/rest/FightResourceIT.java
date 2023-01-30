@@ -102,9 +102,9 @@ public class FightResourceIT {
 	private static final String DEFAULT_VILLAIN_POWERS = "does not eat pain au chocolat";
 	private static final int DEFAULT_VILLAIN_LEVEL = 40;
 
-	private static final String FALLBACK_HERO_NAME = "Fallback hero";
+	private static final String FALLBACK_HERO_NAME = "Fallback liberal";
 	private static final String FALLBACK_HERO_PICTURE = "https://dummyimage.com/280x380/1e8fff/ffffff&text=Fallback+Hero";
-	private static final String FALLBACK_HERO_POWERS = "Fallback hero powers";
+	private static final String FALLBACK_HERO_POWERS = "Fallback liberal score";
 	private static final int FALLBACK_HERO_LEVEL = 1;
 
 	private static final Hero FALLBACK_HERO = new Hero(
@@ -121,9 +121,9 @@ public class FightResourceIT {
 		DEFAULT_VILLAIN_POWERS
 	);
 
-	private static final String FALLBACK_VILLAIN_NAME = "Fallback villain";
+	private static final String FALLBACK_VILLAIN_NAME = "Fallback liberal";
 	private static final String FALLBACK_VILLAIN_PICTURE = "https://dummyimage.com/280x380/b22222/ffffff&text=Fallback+Villain";
-	private static final String FALLBACK_VILLAIN_POWERS = "Fallback villain powers";
+	private static final String FALLBACK_VILLAIN_POWERS = "Fallback liberal score";
 	private static final int FALLBACK_VILLAIN_LEVEL = 45;
 
 	private static final Villain FALLBACK_VILLAIN = new Villain(
