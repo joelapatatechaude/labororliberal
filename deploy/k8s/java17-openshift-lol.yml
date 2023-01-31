@@ -327,6 +327,8 @@ metadata:
 spec:
   port:
     targetPort: http
+  tls:
+    termination: edge
   to:
     kind: Service
     name: rest-labors
@@ -660,6 +662,8 @@ metadata:
 spec:
   port:
     targetPort: http
+  tls:
+    termination: edge
   to:
     kind: Service
     name: rest-liberals
@@ -949,6 +953,8 @@ metadata:
 spec:
   port:
     targetPort: 8080
+  tls:
+    termination: edge
   to:
     kind: Service
     name: apicurio
@@ -1149,6 +1155,8 @@ metadata:
 spec:
   port:
     targetPort: http
+  tls:
+    termination: edge
   to:
     kind: Service
     name: rest-elections
@@ -1346,6 +1354,8 @@ metadata:
 spec:
   port:
     targetPort: 8080
+  tls:
+    termination: edge
   to:
     kind: Service
     name: apicurio
@@ -1535,20 +1545,24 @@ metadata:
     app.openshift.io/vcs-ref: main
     app.quarkus.io/build-timestamp: 2023-01-17 - 14:20:51 +0000
   labels:
+    app: election-statistics
     app.kubernetes.io/name: election-statistics
     app.kubernetes.io/part-of: election-stats
     app.kubernetes.io/version: java17-latest
-    app: election-statistics
+    app.openshift.io/runtime: quarkus
     application: election-stats
     system: quarkus-super-heroes
-    app.openshift.io/runtime: quarkus
   name: election-statistics
 spec:
   port:
     targetPort: http
+  tls:
+    termination: edge
   to:
     kind: Service
     name: election-statistics
+    weight: 100
+  wildcardPolicy: None
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -1654,3 +1668,5 @@ spec:
     name: ui-elections
   port:
     targetPort: 8080
+  tls:
+    termination: edge
