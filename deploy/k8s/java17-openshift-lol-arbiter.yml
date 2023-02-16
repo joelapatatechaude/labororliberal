@@ -1,0 +1,59 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: skupper-site
+data:
+  console-authentication: openshift
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app: elections-db-arbiter
+    application: elections-service
+    system: quarkus-elections
+  name: elections-db-arbiter-config
+data:
+  THIS_IS_ARBITER: ZmlnaHRz
+  MONGODB_REPLICA_SET_MODE: YXJiaXRlcg==
+  MONGODB_REPLICA_SET_KEY: cmVwbGljYXNldA==
+  DISABLE_MONGODB_ROOT_USER: c3VwZXI=
+  MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: c3VwZXI=
+  MONGODB_ADVERTISED_HOSTNAME: ZWxlY3Rpb25zLWRiLWFyYml0ZXI=
+  MONGODB_INITIAL_PRIMARY_HOST: ZWxlY3Rpb25zLWRiLWFybw==
+  ALLOW_EMPTY_PASSWORD: eWVz
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: elections-db-arbiter
+    app.openshift.io/runtime: mongodb
+  name: elections-db-arbiter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: elections-db-arbiter
+  template:
+    metadata:
+      labels:
+        application: elections-service
+        name: elections-db-arbiter
+    spec:
+      containers:
+        - envFrom:
+            - secretRef:
+                name: elections-db-arbiter-config
+          image: bitnami/mongodb:5.0
+          name: elections-db-arbiter
+          ports:
+            - containerPort: 27017
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              memory: 64Mi

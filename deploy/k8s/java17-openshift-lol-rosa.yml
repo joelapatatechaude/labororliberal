@@ -690,7 +690,7 @@ metadata:
   name: rest-elections-config
 data:
   quarkus.liquibase-mongodb.migrate-at-start: "false"
-  quarkus.mongodb.hosts: elections-db-rosa:27017
+  quarkus.mongodb.connection-string: mongodb://elections-db-aro:27017,elections-db-rosa:27017/?replicaSet=replicaset
   quarkus.stork.hero-service.service-discovery.type: kubernetes
   quarkus.stork.hero-service.service-discovery.application: rest-liberals
   quarkus.stork.hero-service.service-discovery.refresh-period: 1M
@@ -723,11 +723,15 @@ metadata:
     system: quarkus-elections
   name: elections-db-rosa-config
 data:
-  MONGODB_DATABASE: ZmlnaHRz
-  MONGODB_USERNAME: c3VwZXJmaWdodA==
-  MONGODB_PASSWORD: c3VwZXJmaWdodA==
-  MONGODB_ROOT_USER: c3VwZXI=
-  MONGODB_ROOT_PASSWORD: c3VwZXI=
+  THIS_IS_SECONDARY: ZmlnaHRz
+  MONGODB_REPLICA_SET_MODE: c2Vjb25kYXJ5
+  MONGODB_REPLICA_SET_KEY: cmVwbGljYXNldA==
+  DISABLE_MONGODB_ROOT_USER: c3VwZXI=
+  MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: c3VwZXI=
+  MONGODB_ADVERTISED_HOSTNAME: ZWxlY3Rpb25zLWRiLXJvc2E=
+  MONGODB_INITIAL_PRIMARY_HOST: ZWxlY3Rpb25zLWRiLWFybw==
+  ALLOW_EMPTY_PASSWORD: eWVz
+
 type: Opaque
 ---
 apiVersion: apps/v1
@@ -1670,3 +1674,11 @@ spec:
     targetPort: 8080
   tls:
     termination: edge
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: skupper-site
+data:
+  console-authentication: openshift
+
