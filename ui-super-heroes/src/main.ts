@@ -9,6 +9,9 @@ if (environment.production) {
 }
 
 console.log('Initialising with NG_APP_ENV: ', process.env.NG_APP_ENV)
+console.log('TEST5')
+console.log('API_BASE_URL', (window as any).NG_CONFIG.API_BASE_URL)
+console.log('CALCULATE_API_BASE_URL', (window as any).NG_CONFIG.CALCULATE_API_BASE_URL)
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
