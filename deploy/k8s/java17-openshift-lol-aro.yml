@@ -1609,9 +1609,9 @@ spec:
         - image: quay.io/rh_ee_cschmitz/lol-ui-elections:latest
           name: ui-elections
           imagePullPolicy: Always
-          env:
-            - name: CALCULATE_API_BASE_URL
-              value: "true"
+          envFrom:
+            - configMapRef:
+                name: ui-config
           livenessProbe:
             failureThreshold: 3
             httpGet:
@@ -1684,3 +1684,12 @@ metadata:
   name: skupper-site
 data:
   console-authentication: openshift
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ui-config
+data:
+  CALCULATE_API_BASE_URL: "true"
+  API_BASE_URL: "https://rest-elections-elections-aro.apps.pqrbjtqn.australiacentral.aroapp.io"
